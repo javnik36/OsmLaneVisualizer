@@ -1,68 +1,70 @@
-  .bicycleno {
-    background-image:url("http://upload.wikimedia.org/wikipedia/commons/4/48/Zeichen_254.svg");
+$wikimedia:"https://upload.wikimedia.org/wikipedia/commons";
+
+   .bicycleno {
+    background-image:url($wikimedia + "/0/02/Znak_B-9.svg");
     }
-  
+
   .footno {
-    background-image:url("http://upload.wikimedia.org/wikipedia/commons/c/cc/Zeichen_259.svg");
-    }  
+    background-image:url($wikimedia + "/e/eb/Znak_B-41.svg");
+    }
 
   .hgvno {
-    background-image:url("http://upload.wikimedia.org/wikipedia/commons/7/72/Zeichen_253.svg");
+    background-image:url($wikimedia + "/7/76/Znak_B-5.svg");
     }
-    
+
   .motorroad {
-    background-image:url("http://upload.wikimedia.org/wikipedia/commons/c/c6/Zeichen_331.svg");
-    }  
+    background-image:url($wikimedia + "/c/ce/Znak_D7.svg");
+    }
   .overtaking {
-    background-image:url("http://upload.wikimedia.org/wikipedia/commons/8/87/Zeichen_276.svg");
-    }  
+    background-image:url($wikimedia + "/a/ad/Znak_B-25.svg");
+    }
   .overtakinghgv {
-    background-image:url("http://upload.wikimedia.org/wikipedia/commons/c/ca/Zeichen_277.svg");
-    }  
-    
+    background-image:url($wikimedia + "/1/14/Znak_B-26.svg");
+    }
+
   .bicycledesig {
-    background-image:url("http://upload.wikimedia.org/wikipedia/commons/2/2d/Zeichen_237.svg");
+    background-image:url($wikimedia + "/1/19/Znak_C13.svg");
     }
   .busdesig {
-    background-image:url("http://upload.wikimedia.org/wikipedia/commons/4/45/Zeichen_245.svg");
-    } 
-    
+    background-image:url($wikimedia + "/4/45/Zeichen_245.svg");//brak polskiego odpowiednika
+    }
+
   .roundabout {
-    background-image:url("http://upload.wikimedia.org/wikipedia/commons/7/72/Zeichen_215_-_Kreisverkehr%2C_StVO_2000.svg");
+    background-image:url($wikimedia + "/7/78/Znak_C-12.svg");
     }
 
 
-  .traffic_signals {  
-    background-image:url("http://upload.wikimedia.org/wikipedia/commons/9/93/Zeichen_131.svg") ;
-    }     
-  .give_way {  
-    background-image:url("http://upload.wikimedia.org/wikipedia/commons/9/96/Zeichen_205.svg") ;
-    }     
-  .stop {  
-    background-image:url("http://upload.wikimedia.org/wikipedia/commons/5/5c/Zeichen_206.svg") ;
-    }     
-  .priority {  
-    background-image:url("http://upload.wikimedia.org/wikipedia/commons/9/91/Zeichen_208.svg") ;
-    }         
-  .crossing {  
-    background-image:url("http://upload.wikimedia.org/wikipedia/commons/b/b0/Zeichen_350-10.svg") ;
-    }       
-  .priority_road {  
-    background-image:url("http://upload.wikimedia.org/wikipedia/commons/f/ff/Zeichen_306_-_Vorfahrtstra%C3%9Fe%2C_StVO_1970.svg") ;
-    }        
-  
-  
-  
-    
+  .traffic_signals {
+    background-image:url($wikimedia + "/d/d4/Znak_A-29.svg") ;
+    }
+  .give_way {
+    background-image:url($wikimedia + "/c/c8/Znak_A-7.svg") ;
+    }
+  .stop {
+    background-image:url($wikimedia + "/8/8a/Poland_road_sign_B-20.svg") ;
+    }
+  .priority {
+    background-image:url($wikimedia + "/9/94/Znak_B-31.svg") ;
+    }
+  .crossing {
+    background-image:url($wikimedia + "/b/b0/Zeichen_350-10.svg") ;//???
+    }
+  .priority_road {
+    background-image:url($wikimedia + "/b/b2/Znak_D-1.svg") ;
+    }
+
+
+
+
 .condition.wet {
-  background-image:url("http://upload.wikimedia.org/wikipedia/commons/0/03/Zusatzzeichen_1052-36.svg");
+  background-image:url($wikimedia + "/0/03/Zusatzzeichen_1052-36.svg");//??
   border:none;
   background-color:transparent;
   height:35px;
   }
 .condition.hgv {
-  background-image:url("http://upload.wikimedia.org/wikipedia/commons/5/50/Zusatzzeichen_1048-12.svg");
+  background-image:url($wikimedia + "/a/a6/Znak_T-23b.svg");
   border:none;
   background-color:transparent;
   height:20px;
-  }      
+  }
