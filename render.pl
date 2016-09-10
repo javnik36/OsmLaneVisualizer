@@ -121,7 +121,7 @@ print <<"HDOC";
 <html lang="en">
 <head>
  <title>OSM Lane Visualizer</title>
- <link rel="stylesheet" type="text/css" href="../lanes/style.css">
+ <link rel="stylesheet" type="text/css" href="../OLV/style.css">
  <meta  charset="UTF-8"/>
 
 <script type="text/javascript">
