@@ -51,9 +51,9 @@ if(defined $ENV{'QUERY_STRING'}) {
     }
   }
 
-  
-  
-my $r = OSMData::readData($url,0); 
+
+
+my $r = OSMData::readData($url,0);
 unless($r) {
   #if only one way found, try to extent it a bit
   if($extendway && scalar keys %{$waydata} <= 4) {
@@ -64,15 +64,15 @@ unless($r) {
       }
     OSMData::readData('[out:json][timeout:25];(  way('.$id.');  >;  way(bn);  >;  way(bn);)->.a;(  way.a[highway][ref="'.$ref.'"];  >;);out body qt;',0);
     }
-  
-  
+
+
   OSMData::organizeWays();
 
 
 
   my $startcnt = $start;
   ## Find the Nth starting point
-  
+
   foreach my $w (sort keys %{$waydata}) {
     if (!defined $waydata->{$w}->{before}) {
       $totalstartpoints++;
@@ -83,7 +83,7 @@ unless($r) {
         }
       }
     }
-  foreach my $w (sort keys %{$waydata}) {   
+  foreach my $w (sort keys %{$waydata}) {
     if (!defined $waydata->{$w}->{after}) {
       $totalstartpoints++;
       if($startcnt > 0) {
@@ -93,7 +93,7 @@ unless($r) {
         }
       }
     }
-    
+
 
   if($adjacent) {
     #Get adjacent ways
@@ -102,9 +102,9 @@ unless($r) {
 #       next unless $waydata->{$w}{checked};
       $str .= '<id-query ref="'.$waydata->{$w}{end}.'" type="node"/>'
       }
-    $str .= '</union>  <print />  <recurse type="node-way"/>  <print />  <recurse type="down"/>    <print /> </osm-script>';  
+    $str .= '</union>  <print />  <recurse type="node-way"/>  <print />  <recurse type="down"/>    <print /> </osm-script>';
 
-    OSMData::readData($str,1); 
+    OSMData::readData($str,1);
 
 
     }
@@ -121,7 +121,7 @@ print <<"HDOC";
 <html lang="en">
 <head>
  <title>OSM Lane Visualizer</title>
- <link rel="stylesheet" type="text/css" href="../OLV/style.css">
+ <link rel="stylesheet" type="text/css" href="../OLV_style.css">
  <meta  charset="UTF-8"/>
 
 <script type="text/javascript">
@@ -129,7 +129,7 @@ print <<"HDOC";
     var url = "?";
     if (str)
       url += x+'='+str;
-    else  
+    else
       url += x+'='+encodeURI(document.getElementsByName(x)[0].value);
     url += "&start="+document.getElementsByName('start')[0].value;
     url += document.getElementsByName('placement')[0].checked?"&placement":"";
@@ -201,20 +201,20 @@ unless($r) {
 
       #Reverse ways where needed
 #       $waydata->{$currid}{checked} = 1;
-      
+
       if($waydata->{$currid}->{reversed}) {
         my $tmp = $waydata->{$currid}{end};
         $waydata->{$currid}{end} = $waydata->{$currid}{begin};
         $waydata->{$currid}{begin} = $tmp;
-        
+
         $tmp = $waydata->{$currid}{after};
         $waydata->{$currid}{after} = $waydata->{$currid}{before};
         $waydata->{$currid}{before} = $tmp;
-        
+
         my @tmp = reverse @{$waydata->{$currid}{nodes}};
         $waydata->{$currid}{nodes} = \@tmp;
         }
-        
+
       push(@outarr,OSMDraw::drawWay($currid));
 
       last unless defined $waydata->{$currid}{after};
@@ -228,8 +228,8 @@ unless($r) {
       $currid = $nextid; #OSMDraw::getBestNext($currid);
       }
     push(@outarr,OSMDraw::linkWay($currid,"up"));
-    print reverse @outarr;  
-    
+    print reverse @outarr;
+
     $currid = 0;
     foreach my $w (sort keys %{$waydata}) { #select all other starting points
       if (!defined $waydata->{$w}->{before} && !$waydata->{$w}{used}) {
@@ -246,7 +246,7 @@ unless($r) {
     last if $currid == 0;
     print "<hr>";
     @outarr = ();
-    }  
+    }
   }
 print <<HDOC;
 </body>
