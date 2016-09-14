@@ -6,6 +6,9 @@ $labelWidth: 100px;
 $signsWidth: 150px;
 
 $colorAutobahn: #5078D0;
+$colorA_DK_S: #FF0000;
+$colorW: #FFCC33;
+$colorRestBackground: #2C5C32;
 $colorBundesstrasse: #F0E060;
 $colorStaatsstrasse: #FFFFFF;
 $colorE: green;
@@ -46,16 +49,16 @@ div.config h3, div.selectquery h3{
 
 div.selectquery input[type=text]{
   width:100px;
-}  
-  
+}
+
 div.way {
   position:relative;
   }
 
 div.wayname {
   z-index:10;
-  }  
-  
+  }
+
 div.sep {
   clear:both;
   height:2px;
@@ -63,15 +66,15 @@ div.sep {
   background:#ddd;
   font-size:12px;
   position:relative;
-  }  
-  
+  }
+
 div.sep .name {
   position:absolute;
   top: -15px;
   left:$labelWidth;
   z-index:10;
-  }  
-  
+  }
+
 div.waylayout {
   position:absolute;
   top:(0px - $laneHeight - 52px);
@@ -82,8 +85,8 @@ div.waylayout {
   border-radius:50px;
   box-shadow:5px 5px 5px #aaa;
   border:1px solid #aaa;
-  }  
-  
+  }
+
 div.connects {
   position:absolute;
   top:45px;
@@ -94,59 +97,59 @@ div.connects {
   border-left:50px solid transparent;
   z-index:5;
   opacity: 0.9;
-  }  
+  }
 
 div.connects.next {
   border-right-color:#888;
   z-index: 2;
   opacity: 1;
-  }  
+  }
 
 div.connects.main {
   border-right-color:#ccc;
-  }  
-  
-  
+  }
+
+
 div.connects.main.from {
   border-right-color:black;
   z-index:2;
   opacity: 1;
-  }  
+  }
 
 div.connects.toward {
   border-right:50px solid #ff4030;
-  }  
-  
+  }
+
 div.waylayout a{
   text-decoration:none !important;
   }
-  
+
 div.label {
   width:$labelWidth;
   height:$laneHeight;
   position:relative;
   float:left;
   top:-15px;
-  }  
-  
+  }
+
 div.info {
   z-index:10;
   float:left;
   position:relative;
   width:$signsWidth;
   height:$laneHeight;
-  }  
+  }
 
 
-  
+
 div.width {
   position:absolute;
   bottom:2px;
   width:($laneWidth - $laneSub - 6px);
   font-size:10px;
   text-align:center;
-  }  
-  
+  }
+
 div.max {
   width:25px;
   height:25px;
@@ -172,10 +175,10 @@ div.max.unkwn {
   border-color:yellow;
   background:white;
   color:#aaa;
-  }  
+  }
 
 div.signs {
-  div { 
+  div {
     width:35px;
     height:35px;
     float:left;
@@ -183,21 +186,21 @@ div.signs {
     background:center center no-repeat transparent;
     background-size:30px;
     }
-  
+
   .max {
     width:25px;
-    height:25px;    
+    height:25px;
     }
-  
-  @import 'signs_DE'; 
-  } 
+
+  @import 'signs_DE';
+  }
 
 .lane div.signs div {
   height:26px;
   width:26px;
   background-size:20px;
-  }  
-  
+  }
+
 .lane .signs  .max {
   background-color:white;
   border-width:3px;
@@ -205,19 +208,19 @@ div.signs {
   height:20px;
   width:20px;
   line-height:20px;
-  }  
-  
-  
+  }
+
+
 div.maxcont {
   width:33px;
   float:left;
-  }  
+  }
 
-  
+
 div.maxcont .max {
   float:none;
   }
-  
+
 div.maxcont .condition {
   border:1px solid black;
   border-radius: 2px;
@@ -232,15 +235,15 @@ div.maxcont .condition {
 div.condition {
   border:none;
   }
-  
+
 div.lane .signs {
   position: absolute;
   bottom: 5px;
   left: 0px;
   height:24px;
-  width:100%; 
+  width:100%;
   }
-  
+
 div.lane {
   position: relative;
   height:$laneHeight;
@@ -255,11 +258,11 @@ div.lane {
 div.lane.forward   {
   background:#cdc;
   }
-  
+
 div.lane.backward {
   background:#dcc;
   }
-  
+
 div.lane.bothlane {
   background:#aaa !important;
   border-left:3px solid white !important;
@@ -289,20 +292,20 @@ div.lane.nolane {
   display:inline-block;
   float:left;
   }
-  
-  
+
+
 div.lane.no {
   border-left:3px solid white;
   border-right:3px solid white;
-  }  
-  
+  }
+
 div.lane.not_left.forward, div.lane.not_right.backward {
   border-left: 3px solid white;
-  }  
-  
+  }
+
 div.lane.not_right.forward, div.lane.not_left.backward {
   border-right:3px solid white;
-  }  
+  }
 
 div.placeholder {
   position:relative;
@@ -313,49 +316,49 @@ div.placeholder {
 
 div.lane.bicycledesig {
   background:#ccc;
-  }  
-  
+  }
+
 div.shoulder, div.noshoulder {
   background:#ccc;
   height:$laneHeight;
 }
-  
+
 div.shoulder {
   border-left:3px solid white;
   border-right:3px solid white;
   width:($laneWidth*0.6) - $laneSub;
   background:#ccc;
-  }  
+  }
 div.noshoulder {
   border:none;
   width:4px;
   background:#aaa;
-  } 
+  }
 
 div.sidewalk {
   border:none;
   width:($laneWidth*0.5);
   background:#bde;
-  }  
-  
+  }
+
 div.nosidewalk {
   border:none;
   width:4px;
   background : #bde;
-  }  
-  
- 
+  }
+
+
 div.turns.backward {
   position:relative;
   top:($laneHeight - 25px);
   transform: rotate(180deg);
-  }  
-  
+  }
+
 div.nolane.island {
   background:#666 !important;
   width: ($laneWidth*0.5) - $laneSub;
-  }  
-  
+  }
+
 div.middle {
   z-index:10;
   position:relative;
@@ -365,8 +368,8 @@ div.middle {
   background:#888;
   float:left;
   opacity:.5;
-  }  
-  
+  }
+
 div.destination {
   font-size:9px;
   position:relative;
@@ -375,15 +378,15 @@ div.destination {
   top:10px;
   margin-left:2px;
   z-index:1;
-  }  
+  }
 
 .backward div.destination {
   top:-15px;
-  }    
+  }
 
 div.destination.double {
   width:(2*$laneWidth - $laneSub - 4px);
-  }  
+  }
 div.destination.triple {
   width:(3*$laneWidth - $laneSub - 4px);
   }
@@ -407,19 +410,19 @@ div.tunnel::after  {
   display: inline-block;
   box-shadow:5px 0px 5px #000;
   }
-  
-  
+
+
 .label a {
   font-size:12px;
   text-decoration:none;
-  }  
+  }
 
 div.clear {
   visibility:none;
   clear:both;
   height:0px;
-  }  
-  
+  }
+
 div.destCountry {
   margin:2 px;
   padding: 0px 5px 1px 5px;
@@ -432,8 +435,8 @@ div.destCountry {
   max-width:100px;
   display:inline;
   float:left;
-  }   
-  
+  }
+
 span.destCountry {
   margin:1 px;
   margin-left:2px;
@@ -453,8 +456,8 @@ span.destCountry {
   height:14px;
   font-size:11px;
   padding:1px;
-  }  
-  
+  }
+
 div.refA, div.refB, div.refK, span.refA, span.refB, span.refK, div.refS, span.refS, div.refE, span.refE, span.ref {
   margin:2px 2px 2px 2px;
   padding: 0px 2px 0 2px;
@@ -463,87 +466,92 @@ div.refA, div.refB, div.refK, span.refA, span.refB, span.refK, div.refS, span.re
   max-width:100px;
   display:inline;
   float:right;
-  }  
-  
+  }
+
 span.refA, span.refB, span.refK, span.refS, span.refE, span.ref {
   display:inline-block;
   float:none;
-  }    
-  
-div.refA, span.refA {
-  background:$colorAutobahn;
+  }
+
+div.refA, span.refA, div.refDK, span.refDK, div.refS, span.refS{
+  background:$colorA_DK_S;
   border:1px solid white;
   color:white;
-  }  
-div.refB, span.refB {
-  background:$colorBundesstrasse;
-  border:1px solid black;
-  color:black;
-  }  
+  }
+div.refG, span.refG {
+  background:white;
+  border:1px solid white;
+  color:white;
+  }
+  div.refW, span.refW {
+    background:$colorW;
+    border:1px solid black;
+    color:black;
+    }
 div.refK, span.refK {
   background:white;
   border:1px solid black;
   color:black;
-  }  
+  }
 div.refE, span.refE {
   background:$colorE;
   border:1px solid white;
   color:white;
-  }    
-  
-div.refS, span.refS {
-  background:white;
-  border:1px solid black;
-  color:black;
-  }  
+  }
 
-span.refS {
-  background:$colorAutobahn;
-  border:1px solid white;
-  color:white;
-  }    
 
-  
 span.ref {
   border:1px solid #aaa;
-}  
-  
+}
+
 div.refcont {
   position:relative;
-  }  
+  }
 
-div.A, div.B, div.K, div.S {  
+div.A, div.B, div.K, div.S, div.AonA, div.R, div.IonA {
   max-height:($laneHeight - 20px);
   overflow:hidden;
   }
-  
+
+div.AonA {
+    background:$colorA_DK_S;
+    border:1px solid white;
+    color:white;
+}
+
+div.IonA, div.R {
+    background:$colorRestBackground;
+    border:1px solid white;
+    color:white;
+}
+
 div.A {
   background:$colorAutobahn;
   border:1px solid white;
   color:white;
-  }  
+  }
 div.B {
   background:$colorBundesstrasse;
   color:black;
   border:1px solid black;
-  }    
+  }
 div.K {
   background:$colorBundesstrasse;
   color:black;
   border:1px solid black;
-  }  
+  }
 div.S {
   background:$colorStaatsstrasse;
   color:black;
   border:1px solid black;
-  }  
-  
+  }
+
 div.refcont div div.dest {
   width:($laneWidth - 17px);
   margin:1px 0 1px 2px;
   min-height:12px;
   }
-  
+
 .double div.refcont div div.dest {
   width:(2*$laneWidth - 17px);
   }
@@ -553,7 +561,7 @@ div.refcont div div.dest {
 .quadruple div.refcont div div.dest {
   width:(4*$laneWidth - 17px);
   }
-  
+
 div.refcont div {
   @import 'destinationsigns';
 
@@ -565,7 +573,7 @@ div.refcont div {
   div.symbolonly {
     float:left;
     height:24px;
-    width:24px;    
+    width:24px;
     }
   div.symbolonly>span{
     background-size:24px;
@@ -574,13 +582,13 @@ div.refcont div {
     height:24px;
     width:24px;
     }
-  } 
-  
+  }
+
 div.refcont:hover .tooltip {
   opacity:1;
   margin:0px;
   }
-  
+
 div.refcont .tooltip {
   z-index:5;
   position: absolute;
@@ -596,7 +604,7 @@ div.refcont .tooltip {
   margin-left: -999em;
   margin-top: -999em;
   transition: opacity 0.1s linear 0.3s;
-  }  
+  }
 
 div.turns {
   color:white;
@@ -606,17 +614,17 @@ div.turns {
   margin-top:-5px;
   margin-bottom:-15px;
   height:30px;
-  }  
-  
- 
+  }
+
+
 div.connectdestination .K, div.connectdestination .A, div.connectdestination .B{
-  box-shadow:5px 5px 5px #aaa;  
-  }  
-  
+  box-shadow:5px 5px 5px #aaa;
+  }
+
 div.connectdestination {
   position:absolute;
   top: -40px -$laneHeight;
-  left: 300px;  
+  left: 300px;
 }
 
 div.connectdestination div.destination {
@@ -642,8 +650,8 @@ hr {
   box-shadow:3px 3px 3px #aaa;
 /*   visibility:hidden; */
   }
-  
-  
+
+
 span.navigation {
   display: inline-block;
   text-align:center;
@@ -651,7 +659,7 @@ span.navigation {
   font-weight:bold;
   font-size:20px;
   cursor:pointer;
-}  
+}
 span.normal {
   color:blue;
   cursor:pointer;

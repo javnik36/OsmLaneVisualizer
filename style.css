@@ -423,13 +423,18 @@ span.refA, span.refB, span.refK, span.refS, span.refE, span.ref {
   display: inline-block;
   float: none; }
 
-div.refA, span.refA {
-  background: #5078D0;
+div.refA, span.refA, div.refDK, span.refDK, div.refS, span.refS {
+  background: #FF0000;
   border: 1px solid white;
   color: white; }
 
-div.refB, span.refB {
-  background: #F0E060;
+div.refG, span.refG {
+  background: white;
+  border: 1px solid white;
+  color: white; }
+
+div.refW, span.refW {
+  background: #FFCC33;
   border: 1px solid black;
   color: black; }
 
@@ -443,25 +448,25 @@ div.refE, span.refE {
   border: 1px solid white;
   color: white; }
 
-div.refS, span.refS {
-  background: white;
-  border: 1px solid black;
-  color: black; }
-
-span.refS {
-  background: #5078D0;
-  border: 1px solid white;
-  color: white; }
-
 span.ref {
   border: 1px solid #aaa; }
 
 div.refcont {
   position: relative; }
 
-div.A, div.B, div.K, div.S {
+div.A, div.B, div.K, div.S, div.AonA, div.R, div.IonA {
   max-height: 115px;
   overflow: hidden; }
+
+div.AonA {
+  background: #FF0000;
+  border: 1px solid white;
+  color: white; }
+
+div.IonA, div.R {
+  background: #2C5C32;
+  border: 1px solid white;
+  color: white; }
 
 div.A {
   background: #5078D0;

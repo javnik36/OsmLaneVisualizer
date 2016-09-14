@@ -1,0 +1,13 @@
+git clone http://github.com/javnik36/OsmLaneVisualizer.git
+cd OsmLaneVisualizer
+git checkout pl-changes
+./render.pl
+(if fails)
+cpan
+wait------>
+yes
+ctrl+d(quitting)
+cpan JSON (~20min)
+perl -MLWP::Simple -e 1 //if nothing outputtet->ok, when not:
+perl -MCPAN -e'install "LWP::Simple"' (~1h)
+Done?

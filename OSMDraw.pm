@@ -12,24 +12,24 @@ my $totallength = 0;
 
 
 #################################################
-## Returns one or two symbols for maxspeed, 
+## Returns one or two symbols for maxspeed,
 ## separated forward and backward direction if needed
 #################################################
 sub makeMaxspeed {
   my $id = shift @_;
   my $t = $waydata->{$id}{tags};
   my $out = '';
-  
+
   my $maxforward  = $t->{'maxspeed:forward'}  || $t->{'maxspeed'} || 'unkwn';
   my $maxbackward = $t->{'maxspeed:backward'} || $t->{'maxspeed'} || 'unkwn';
   my $fwdclass = $maxforward; my $bckclass = $maxbackward;
   $maxforward =~ s/none//;
   $maxbackward =~ s/none//;
-  
+
   if($maxforward eq $maxbackward) {
     $out = '<div class="max '.$fwdclass.'">'.$maxforward.'</div>';
     }
-  elsif ($waydata->{$id}{reversed}) {  
+  elsif ($waydata->{$id}{reversed}) {
     $out  = '<div class="max fwd '.$fwdclass.'">'.$maxforward.'</div>';
     $out .= '<div class="max bck '.$bckclass.'">'.$maxbackward.'</div>';
     }
@@ -37,15 +37,15 @@ sub makeMaxspeed {
     $out  = '<div class="max bck '.$bckclass.'">'.$maxbackward.'</div>';
     $out .= '<div class="max fwd '.$fwdclass.'">'.$maxforward.'</div>';
     }
-  foreach my $mc (qw(maxspeed:hgv maxspeed:hgv:forward maxspeed:hgv:backward)) {  
+  foreach my $mc (qw(maxspeed:hgv maxspeed:hgv:forward maxspeed:hgv:backward)) {
     if ($t->{$mc})  {
       $out .= '<div class="maxcont">';
       $out .= '<div class="max ">'.($t->{$mc}).'</div>';
       $out .= '<div class="condition hgv">&nbsp;</div>';
       $out .= '</div>';
       }
-    }  
-  foreach my $mc (qw(maxspeed:conditional maxspeed:forward:conditional maxspeed:backward:conditional)) {   
+    }
+  foreach my $mc (qw(maxspeed:conditional maxspeed:forward:conditional maxspeed:backward:conditional)) {
     if ($t->{$mc})  {
       my $str = $t->{$mc};
       while ($str =~ /([^\(;]+)\s*@\s*(\(([^\)]+)\)|([^;]+))/g) {
@@ -61,13 +61,13 @@ sub makeMaxspeed {
         $out .= '</div>';
         }
       }
-    }  
+    }
   return $out;
   }
 
 #################################################
 ## road signs
-################################################# 
+#################################################
 sub makeSigns {
   my $obj = shift @_;
   my $i   = shift @_;
@@ -86,10 +86,10 @@ sub makeSigns {
     }
   if ($t->{'overtaking'} eq "no" || $t->{'overtaking:forward'} eq "no" || $t->{'overtaking:backward'} eq "no") {
     $out .= "<div class=\"overtaking\">&nbsp;</div>";
-    }    
+    }
   if ($t->{'overtaking:hgv'} eq "no" || $t->{'overtaking:hgv:backward'} eq "no" || $t->{'overtaking:hgv:forward'} eq "no") {
     $out .= "<div class=\"overtakinghgv\">&nbsp;</div>";
-    }    
+    }
   if ($t->{'bicycle'} eq "no") {
     $out .= "<div class=\"bicycleno\">&nbsp;</div>";
     }
@@ -121,10 +121,10 @@ sub makeSigns {
   return $out;
   }
 
-  
+
 #################################################
 ## Signs from node tags
-#################################################   
+#################################################
 sub makeNodeSigns  {
   my $id = shift(@_);
   my $st;my $out = '';
@@ -138,35 +138,37 @@ sub makeNodeSigns  {
       if($k eq 'highway' && $nodedata->{$n}{tags}{$k} eq 'mini_roundabout') {$st->{'roundabout'} = 1;}
       }
     }
-  print Dumper $st;  
+  print Dumper $st;
   foreach my $s (keys %{$st}) {
-    $out .= "<div class=\"$s\">&nbsp;</div>"; 
+    $out .= "<div class=\"$s\">&nbsp;</div>";
     }
-  return $out;  
-  }  
-  
-  
+  return $out;
+  }
+
+
 #################################################
 ## Print a road ref number
-#################################################   
+#################################################
 sub printRef {
   my $r = shift @_;
   my $cr = "";
   my $o = "";
   $cr = "A" if $r =~ /^\s*A/;
-  $cr = "B" if $r =~ /^\s*B/;
   $cr = "E" if $r =~ /^\s*E/;
   $cr = "S" if $r =~ /^\s*S/;
+  $cr = "DK" if $r =~ /^\s*\d{1,2}/;
+  $cr = "G" if $r =~ /W$/;
+  $cr = "W" if $r =~ /^s*\d{3}/;
   unless($r =~ '^\s*$') {
     $o .='<span class="ref'.$cr.'">'.$r.'</span>';
     }
-  return $o;  
+  return $o;
   }
 
-  
+
 #################################################
 ## Format the "ref" of a way
-################################################# 
+#################################################
 sub makeRef {
   my ($ref) = @_;
   my $o ='';
@@ -175,20 +177,22 @@ sub makeRef {
     my @refs = split(';',$ref);
     foreach my $r (@refs) {
       $cr = "A" if $r =~ /^\s*A/;
-      $cr = "B" if $r =~ /^\s*B/;
       $cr = "E" if $r =~ /^\s*E/;
       $cr = "S" if $r =~ /^\s*S/;
+      $cr = "DK" if $r =~ /^\s*\d{1,2}/;
+      $cr = "G" if $r =~ /W$/;
+      $cr = "W" if $r =~ /^s*\d{3}/;
       if($r ne '') {
         $o .='<div class="ref'.$cr.'">'.$r.'</div>';
         }
       }
     }
   return $o;
-  }  
-  
+  }
+
 #################################################
 ## Make a full destination sign for one lane
-#################################################   
+#################################################
 sub makeDestination {
   my ($lane,$way,$lanes,$option) = @_;
   my $o = "";
@@ -207,20 +211,22 @@ sub makeDestination {
 
   $ref   =~ s/;/ \/ /g;
   $signdest =~ s/;/<br>/g;
-  $titledest =~ s/;/\n/g;  
+  $titledest =~ s/;/\n/g;
   $destsym =~ s/none//g;
-  
+
   if($ref || $dest || $destsym || $destcountry || $refto || $to) {
     $o .= '<div class="refcont">';
     unless($option =~ /notooltip/) {
       $o .= '<div class="tooltip">'.$ref.'<br>'.$signdest.'</div>';
       }
-    
-    $cr = 'K';
-    $cr = "B" if $roadref =~ /^\s*B/;
-    $cr = "A" if $roadref =~ /^\s*A/ || $ref =~ /^\s*A/;
 
-    
+    $cr = 'K';
+    #$cr = "B" if $roadref =~ /^\s*B/;
+    #$cr = "A" if $roadref =~ /^\s*A/ || $ref =~ /^\s*A/;
+    $cr = "AonA" if $roadref =~ /^\s*A/ && $ref =~ /^\s*A/;
+    $cr = "IonA" if $roadref =~ /^\s*A/ && ($ref =~ /^\s*A/ || $ref =~ /^\s*\d{1,2}/ || $ref =~ /W$/ || $ref =~ /^\s*S/);
+    $cr = "R" if $ref =~ /W$/ || $ref =~ /^\s*S/ || $ref =~ /^\s*\d{1,2}/;
+
     $o .='<div class="'.$cr.'" >';
     my @dests  = split(";",$dest,-1);
     my @reftos    = split(";",$refto,-1);
@@ -241,8 +247,8 @@ sub makeDestination {
       $o .= printRef($reftos[$i]);
       $o .= ($tos[$i]||"&nbsp;").'</span>';
       $o .= '</div>';
-      } 
-    
+      }
+
     for (my $i = 0; $i < max(scalar @dests,scalar @syms); $i++ ) {
       if($cols[$i]) {
         my $tc = '';
@@ -264,27 +270,27 @@ sub makeDestination {
       $o .= '</div>';
       }
 
-    $o .= '<div class="clear">&nbsp;</div>'; 
- 
+    $o .= '<div class="clear">&nbsp;</div>';
+
     if(scalar @ctr != scalar @dests) {
       foreach my $c (@ctr) {
         next if $c eq 'none';
         $o .= '<div class="destCountry">'.$c.'</div>';
         }
       }
-     
+
     if($ref) {
       my @refs = split('/',$ref);
       foreach my $r (reverse @refs) {
         $o .= printRef($r);
         }
-      }  
-     
-    $o .= "</div></div>";  
+      }
+
+    $o .= "</div></div>";
     }
-  return $o;  
+  return $o;
   }
-  
+
 sub makeAllDestinations {
   my $id = shift @_;
   my $st = shift @_;
@@ -292,18 +298,18 @@ sub makeAllDestinations {
   my $correspondingid = shift @_;
   my $t;
   my $lanes;
-  
+
   $t = $store->{way}[$st]{$id}{tags};
   $lanes = $store->{way}[$st]{$id}{lanes};
   my $tilt = -($store->{way}[$st]{$correspondingid || $id}{lanes}->{tilt}||0);
-  
+
   my @destinations;
   for(my $i=0; $i < $lanes->{numlanes}; $i++) {
     my $dest  = OSMDraw::makeDestination($i,$t,$lanes,$option);
     push(@destinations,$dest);
     }
   for(my $i=0; $i < $lanes->{numlanes}; $i++) {
-    if(@destinations[$i]) {  
+    if(@destinations[$i]) {
       my $w = '';
       if (@destinations[$i] eq @destinations[$i+1]) {
         $w = 'double';
@@ -317,29 +323,29 @@ sub makeAllDestinations {
             }
           }
         }
-      @destinations[$i] = '<div class="destination '.$w.'"  style="transform:skewX('.$tilt.'deg)">'.@destinations[$i].'</div>';  
+      @destinations[$i] = '<div class="destination '.$w.'"  style="transform:skewX('.$tilt.'deg)">'.@destinations[$i].'</div>';
       }
-    } 
+    }
   return \@destinations;
   }
-  
-  
+
+
 #################################################
 ## In case the way splits, the best choice is the one with the smallest turning angle. Despite on roundabouts...
 #################################################
-sub getBestNext {  
+sub getBestNext {
   my $id = shift @_;
   my $angle = 0;
   my $ra = 0;
   my $minangle = 180;
   my $realnext;
   my $fromdirection = OSMData::calcDirection($nodedata->{$waydata->{$id}{nodes}[-1]},$nodedata->{$waydata->{$id}{nodes}[-2]});
-  
+
   if($waydata->{$id}{tags}{'junction'} eq 'roundabout') {
     $ra = 1;
     $minangle = 0;
     }
-    
+
   return unless defined $waydata->{$id}{after};
   foreach my $nx (@{$waydata->{$id}{after}}) {
     if($nodedata->{$waydata->{$nx}{nodes}[0]} == $nodedata->{$waydata->{$id}{nodes}[-1]}) {
@@ -348,7 +354,7 @@ sub getBestNext {
     else {
       $angle = OSMData::calcDirection($nodedata->{$waydata->{$nx}{nodes}[-2]},$nodedata->{$waydata->{$nx}{nodes}[-1]});
       }
-    
+
     $angle = ($fromdirection-$angle);
     $angle = OSMData::NormalizeAngle($angle);
     $angle = abs($angle);
@@ -358,12 +364,12 @@ sub getBestNext {
       $realnext = $nx;
       }
     }
-  return $realnext;  
+  return $realnext;
   }
 
 #################################################
 ## Generate arrows for turn-lanes
-#################################################  
+#################################################
 sub makeTurns {
   my $t = ';'.shift @_;
   my $dir = shift @_;
@@ -385,7 +391,7 @@ sub makeTurns {
 
 #################################################
 ## Draw a sketch of all ways joining in a given node
-#################################################    
+#################################################
 sub makeWaylayout {
   my $id = shift @_;
   my $next = shift @_;
@@ -397,7 +403,7 @@ sub makeWaylayout {
   my $stangle = OSMData::calcDirection($store->{node}[0]{$waydata->{$id}{nodes}[-1]},
                                         $store->{node}[0]{$waydata->{$id}{nodes}[-2]})
                                         -90;
-  $stangle = 0;                                        
+  $stangle = 0;
   foreach my $i (@{$endnodes->[1]{$waydata->{$id}{end}}}) {
     my $nd = 0;
     $nd = $store->{way}[1]{$i}{nodes}[1]     if ($store->{way}[1]{$i}{nodes}[0] == $waydata->{$id}{end});
@@ -426,10 +432,10 @@ sub makeWaylayout {
       }
     }
   $out .= '</div>';
-  
+
   if(scalar @{$endnodes->[1]{$waydata->{$id}{end}}} >= 3 && $cntways == 1 && (($connectsangle > -160 && $connectsangle < -20) || $connectsangle > 200)) { #if only one way and in forward direction
     OSMLanes::InspectLanes($store->{way}[1]{$connectsid});
-    
+
     $out .= '<div class="connectdestination">';
     my $d = OSMDraw::makeAllDestinations($connectsid,1,'notooltip',$id);
     foreach my $l (@{$d}) {
@@ -437,12 +443,12 @@ sub makeWaylayout {
       }
     $out .= '</div>';
     }
-  return $out;  
+  return $out;
   }
 
 #################################################
 ## draws shoulders of ways
-#################################################  
+#################################################
 sub makeShoulder {
   my $obj = $waydata->{shift @_};
   my $side = shift @_;
@@ -458,7 +464,7 @@ sub makeShoulder {
         $o .= "<div class=\"lane noshoulder\" >&nbsp;</div>";
         }
       }
-    else {  
+    else {
       if((((defined $shoulder && $shoulder ne 'left' && $shoulder ne 'both') || $shoulder eq 'no') && $obj->{tags}{'shoulder:left'} ne 'yes') || $obj->{tags}{'shoulder:left'} eq 'no') {
         $o .= "<div class=\"lane noshoulder\">&nbsp;</div>";
         $obj->{lanes}{offset} -= 4;
@@ -477,7 +483,7 @@ sub makeShoulder {
       if($shoulder eq 'left' || $shoulder eq 'both' || $obj->{tags}{'shoulder:left'} eq 'yes') {
         $o .= "<div class=\"lane shoulder\">&nbsp;</div>";
         }
-      }  
+      }
     else {
       if($shoulder eq 'right' || $shoulder eq 'both' || $obj->{tags}{'shoulder:right'} eq 'yes') {
         $o .= "<div class=\"lane shoulder\" >&nbsp;</div>";
@@ -487,14 +493,14 @@ sub makeShoulder {
         $o .= "<div class=\"lane noshoulder\">&nbsp;</div>";
         $obj->{lanes}{offset} -= 4;
         }
-      }  
+      }
     }
   return $o;
   }
 
 #################################################
 ## draws sidewalks
-#################################################    
+#################################################
 sub makeSidewalk {
   my $obj = $waydata->{shift @_};
   my $side = shift @_;
@@ -507,12 +513,12 @@ sub makeSidewalk {
   elsif($sidewalk eq "right") {$l = "nosidewalk";    $r = "sidewalk"; }
   elsif($sidewalk eq "both") {$l = "sidewalk";    $r = "sidewalk"; }
   elsif(defined $sidewalk)  {$l = "nosidewalk";    $r = "nosidewalk"; }
-  
+
   if(($obj->{tags}{'sidewalk:left'}// '') eq 'yes') {$l = "sidewalk";}
   if(($obj->{tags}{'sidewalk:right'}// '') eq 'yes') {$r = "sidewalk";}
   if(($obj->{tags}{'sidewalk:both'}// '') eq 'yes') {$r = "sidewalk";$l = "sidewalk";}
-  
-  
+
+
   my $swlwidth = 4; my $swrwidth = 4;
   $swlwidth = $LANEWIDTH/2 unless $l =~ /^no/;
   $swrwidth = $LANEWIDTH/2 unless $r =~ /^no/;
@@ -522,38 +528,38 @@ sub makeSidewalk {
   if (defined $obj->{tags}{'sidewalk:width'} || defined $obj->{tags}{'sidewalk:right:width'} || defined $obj->{tags}{'sidewalk:both:width'}) {
     $swrwidth = $LANEWIDTH/4*($obj->{tags}{'sidewalk:right:width'} || $obj->{tags}{'sidewalk:both:width'} || $obj->{tags}{'sidewalk:width'}) unless  $r =~ /^no/;
     }
-  
-  
+
+
   if($r && (($side eq 'right' && !$obj->{reversed}) || ($side eq 'left' && $obj->{reversed}))) {
     $o .= "<div class=\"lane $r\" style='width:".$swrwidth."px;' >&nbsp;</div>";
     }
   elsif($l && (($side eq 'left' && !$obj->{reversed}) || ($side eq 'right' && $obj->{reversed}))) {
     $o .= "<div class=\"lane $l\" style='width:".$swlwidth."px;'>&nbsp;</div>";
     }
-    
-  if($r && $obj->{reversed} && $side eq 'right') {  
+
+  if($r && $obj->{reversed} && $side eq 'right') {
     $obj->{lanes}{offset} -= $swrwidth;#  unless($r =~ /^no/) ;
 #     $obj->{lanes}{offset} -= 4   if($r =~ /^no/) ;
     }
-  if($l && !$obj->{reversed} && $side eq 'left') {  
+  if($l && !$obj->{reversed} && $side eq 'left') {
     $obj->{lanes}{offset} -= $swlwidth;#  unless($l =~ /^no/) ;
 #     $obj->{lanes}{offset} -= 4   if($l =~ /^no/) ;
     }
-  
-  return $o;  
+
+  return $o;
   }
 
-  
+
 #################################################
 ## JS code for map update
-#################################################   
+#################################################
 sub generateMapJS  {
   my $id = shift @_;
   my $lat = $nodedata->{$waydata->{$id}{begin}}{lat};
-  my $lon = $nodedata->{$waydata->{$id}{begin}}{lon};  
+  my $lon = $nodedata->{$waydata->{$id}{begin}}{lon};
   my $str = "";
 #   $str .= 'map.setView(['.$lat.', '.$lon.'], 17)';
-  $str .= 'map.removeLayer(marker);'; 
+  $str .= 'map.removeLayer(marker);';
   $str .= 'marker = L.marker(['.$lat.', '.$lon.']).addTo(map);';
   my $list = "";
   foreach my $n (@{$waydata->{$id}{nodes}}) {
@@ -564,13 +570,13 @@ sub generateMapJS  {
   $str .= 'polyline = L.polyline(['.$list.'], {color: \'#44f\'}).addTo(map);';
   $str .= 'map.fitBounds(polyline.getBounds());';
   return $str;
-  
+
 }
 
 
 #################################################
 ## Continuation links top/bottom of page
-################################################# 
+#################################################
 sub linkWay {
   my $id = shift @_;
   my $arrow = shift @_;
@@ -580,13 +586,13 @@ sub linkWay {
   my $str = "";
   $str .= '<span class="'.$style.'" href="" onClick="changeURL(\'wayid\',\''.$id.'\')">'.$arrow.'</span>';
   return $str;
-  
+
   }
 
-  
+
 #################################################
 ## Produce html output to show a way
-#################################################  
+#################################################
 sub drawWay {
   my $id = shift @_;
   my $t = $waydata->{$id}{tags};
@@ -596,17 +602,17 @@ sub drawWay {
 
   OSMLanes::InspectLanes($waydata->{$id});
   my $lanes = $waydata->{$id}{lanes};
-  
+
   my $lat = $nodedata->{$waydata->{$id}{begin}}{lat};
-  my $lon = $nodedata->{$waydata->{$id}{begin}}{lon};  
+  my $lon = $nodedata->{$waydata->{$id}{begin}}{lon};
   my $name = $t->{'name'};
      $name .= "<br>][".$t->{'bridge:name'} if $t->{'bridge:name'};
      $name .= "<br>)(".$t->{'tunnel:name'} if $t->{'tunnel:name'};
      $name .= "&nbsp;" unless $name;
   $out .= '<div class="way" >';
-  
+
   $out .= '<div class="middle">&nbsp;</div>' if $USEplacement;
-  
+
   $out .= '<div class="label" onMouseOver="'.generateMapJS($id).'">';
   $out .= sprintf("km %.1f",$totallength/1000);
   $out .= '<br><a name="'.$id.'" href="https://www.openstreetmap.org/way/'.$id.'" title="'.OSMData::listtags($waydata->{$id}).'" >Way '.$id.'</a>';
@@ -616,7 +622,7 @@ sub drawWay {
   $out .= " <a target=\"_blank\" href=\"http://level0.osmz.ru/?url=way/$id!\">(L)</a>\n";
   $out .= linkWay($id,"(V)",'normal');
   $out .= "</div>\n";
-  
+
   $out .= '<div class="info">';
   $out .= OSMDraw::makeRef(($t->{'ref'}||'').';'.($t->{'int_ref'}||''),'');
   $out .= "<div style=\"clear:both;width:100%\">$name</div>";
@@ -629,13 +635,13 @@ sub drawWay {
   $out .= "</div></div>\n";
 
   my $bridge = ((defined $t->{'bridge'})?'bridge':'').((defined $t->{'tunnel'})?' tunnel':'');
- 
+
 
 
   $waydata->{$id}{lanes}{destinations} = OSMDraw::makeAllDestinations($id,0);
-  
+
   my @outputlanes;
-  
+
   for(my $i=0; $i < $lanes->{numlanes}; $i++) {
     my $dir    = $lanes->{list}[$i];
     my $turns  = $lanes->{turn}[$i];
@@ -645,14 +651,14 @@ sub drawWay {
     my $change = ($lanes->{change}[$i]||"")." ";
     my $o;
 
-    
+
     $o .= '<div class="lane '.$dir." ".$change.$access.'" ';
     $o .= 'style="width:'.($width*$LANEWIDTH/4-$STROKEWIDTH*2).'px"' if $lanewidth && $width;
     $o .= '>';
     if($dir ne "nolane") {
       $o .= OSMDraw::makeTurns($turns,$dir);
-      if($lanes->{destinations}[$i]) {  
-        $o .= $lanes->{destinations}[$i];  
+      if($lanes->{destinations}[$i]) {
+        $o .= $lanes->{destinations}[$i];
         }
       $o .= "<div class=\"signs\" style=\"transform:skewX(-".($lanes->{tilt}||0)."deg)\">";
       if($max) {
@@ -667,39 +673,39 @@ sub drawWay {
     $o .= '</div>';
     push(@outputlanes,$o);
     }
-    
+
   unshift(@outputlanes,OSMDraw::makeShoulder($id,'left'));
   push   (@outputlanes,OSMDraw::makeShoulder($id,'right'));
 
   unshift(@outputlanes,OSMDraw::makeSidewalk($id,'left'));
   push   (@outputlanes,OSMDraw::makeSidewalk($id,'right'));
-  
+
   $out .= '<div class="placeholder '.$bridge.'" style="transform:skewX('.($lanes->{tilt}||0).'deg);margin-left:'.($lanes->{offset}).'px">'."\n";
   $out .= join("\n",@outputlanes);
   $out .= "</div>";#placeholder
-  
-  my $beginnodetags = $nodedata->{$waydata->{$id}{begin}}{'tags'};  
+
+  my $beginnodetags = $nodedata->{$waydata->{$id}{begin}}{'tags'};
   if(defined $beginnodetags->{highway} && $beginnodetags->{highway} eq "motorway_junction") {
     $out .= '<div class="sep"><div class="name">'.$beginnodetags->{ref}." ".$beginnodetags->{name}.'</div>';
     }
   else {
     $out .= '<div class="sep">&nbsp;';
     }
-  
-  
+
+
   if($adjacent) {
-    if(defined $endnodes->[1]{$waydata->{$id}{end}} ) { 
+    if(defined $endnodes->[1]{$waydata->{$id}{end}} ) {
       $out .= OSMDraw::makeWaylayout($id, getBestNext($id));
       }
-    }  
+    }
 
-  
+
   $out .= '</div>';
   $out .= "</div>\n\n";
   return $out;
 }
- 
-  
+
+
 
 
 1;
