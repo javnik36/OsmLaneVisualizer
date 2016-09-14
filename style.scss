@@ -451,7 +451,7 @@ span.destCountry {
   display:inline;
 }
 
-.info .A, .info .B, .info .refA, .info .refB, .info .refK, .info .refK, .info .S, .info .refS, .info .E, .info .refE {
+.info .A, .info .B, .info .refA, .info .refB, .info .refK, .info .refK, .info .S, .info .refS, .info .E, .info .refE, .info .refW, .info .refG, .info .refDK {
   float:left;
   height:14px;
   font-size:11px;
@@ -483,11 +483,11 @@ div.refG, span.refG {
   border:1px solid white;
   color:white;
   }
-  div.refW, span.refW {
-    background:$colorW;
-    border:1px solid black;
-    color:black;
-    }
+div.refW, span.refW {
+  background:$colorW;
+  border:1px solid black;
+  color:black;
+  }
 div.refK, span.refK {
   background:white;
   border:1px solid black;

@@ -224,7 +224,7 @@ sub makeDestination {
     #$cr = "B" if $roadref =~ /^\s*B/;
     #$cr = "A" if $roadref =~ /^\s*A/ || $ref =~ /^\s*A/;
     $cr = "AonA" if $roadref =~ /^\s*A/ && $ref =~ /^\s*A/;
-    $cr = "IonA" if $roadref =~ /^\s*A/ && ($ref =~ /^\s*A/ || $ref =~ /^\s*\d{1,2}/ || $ref =~ /W$/ || $ref =~ /^\s*S/);
+    $cr = "IonA" if $roadref =~ /^\s*A/ && ($ref =~ /^\s*\d{1,2}/ || $ref =~ /W$/ || $ref =~ /^\s*S/);
     $cr = "R" if $ref =~ /W$/ || $ref =~ /^\s*S/ || $ref =~ /^\s*\d{1,2}/;
 
     $o .='<div class="'.$cr.'" >';
