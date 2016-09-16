@@ -145,45 +145,46 @@ print <<"HDOC";
 
 </head>
 <body class="$extrasizeactive">
-<h1>OSM Lane Visualizer</h1>
+<h1>OSM Lane Visualizer <i>pl</i></h1>
 <div id="header">
-<p>Enter a valid overpass query that delivers a list of continuous ways, e.g. as shown here: <a href="http://overpass-turbo.eu/s/6vr">Overpass Turbo</a>. Just put the Overpass query to the text box.
-<br>As there are several "last ways" (at least two...) in each data set, select one by putting a number in the box below. All tags of a way are shown as mouse-over on the text "way" on the left side.
-<br><a href="https://github.com/mueschel/OsmLaneVisualizer#interpreted-tags">Currently supported keys.</a> All code is available on <a href="https://github.com/mueschel/OSMLaneVisualizer">GitHub</a>. Pictures are linked from wikimedia-commons.
-<br>Hover over the way ID to update the map!
+<p>Wprowadź poprawne zapytanie do <a>Overpassa</a> zawierające listę następujących po sobie linii, np. jak <a href="http://overpass-turbo.eu/s/6vr">w tym przykładzie</a>. Wpisz swoje zapytanie w oknie poniżej.<br>
+Ponieważ w każdym zestawie danych są co najmniej 2 linie końcowe, wybierz jeden koniec i wpisz jego numer w okienku poniżej (przy złym wpisaniu droga będzie po prostu w drugim kierunku).<br>
+Pełne otagowanie danej linii oraz położenie na minimapie pokazuje się po najechaniu kursorem na jej numer (po lewej stronie).<br><br>
+Kod sforkowany od użytkownika <a href="https://github.com/mueschel/OSMLaneVisualizer">mueschel</a> dostosowany do polskiego oznakowania drogowego. Kod dostępny na licencji <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY-NC-SA 4.0 International</a>.<br>
+Więcej informacji na <a href="https://github.com/javnik36/OsmLaneVisualizer">Githubie.</a></p>
 <div class="config">
-<h3>Configuration</h3>
-<label title="Evaluate the placement tag to get a more natural arrangement of lanes">
-  <input type="checkbox" name="placement" $USEplacement>Use placement</label>
-<br><label title="Show the geometry of all ways joining at the end nodes of each segment">
-  <input style="margin_left:30px;" type="checkbox" name="adjacent" $adjacent >Use adjacent ways</label>
-<br><label title="Determine width of lanes from width tag. Note that this does not work well in combination with destination signs">
-  <input style="margin_left:30px;" type="checkbox" name="lanewidth" $lanewidth >Use lane width</label>
-<br><label title="Use tags on nodes to draw additional information">
-  <input style="margin_left:30px;" type="checkbox" name="usenodes" $usenodes >Use tags on nodes</label>
+<h3>Ustawienia:</h3>
+<label title="Bierz pod uwagę tag placement, by uzyskać bardziej naturalne ułożenie pasow">
+  <input type="checkbox" name="placement" $USEplacement>Tag <i>placement</i></label>
+<br><label title="Pokaż położenie wszytkich linii połączonych na końcowych węzłach każdego segmentu">
+  <input style="margin_left:30px;" type="checkbox" name="adjacent" $adjacent >Pokaż przyległe linie</label>
+<br><label title="Przelicz szerokość pasów jezdni z tagu width. Nie działa najlepiej w kombinacji ze znakami kierunkowymi(destination)">
+  <input style="margin_left:30px;" type="checkbox" name="lanewidth" $lanewidth >Przeliczaj szerokość</label>
+<br><label title="Uwzględnij tagowanie węzłów by uzyskać dodatkowe informacje">
+  <input style="margin_left:30px;" type="checkbox" name="usenodes" $usenodes >Informacje z węzłów</label>
 <!--<br><label title="Increase the size of all lanes by 50% in each direction">
   <input style="margin_left:30px;" type="checkbox" name="extrasize" $extrasize >Larger lanes</label>-->
-<br><label title="If the API call returns a single way, look for up to two ways in front and after the found one with the same ref-tag">
-  <input style="margin_left:30px;" type="checkbox" name="extendway" $extendway >Include ways before &amp; after</label>
-<br><label>Start at end number <input type="text" name="start" value="$start" style="width:30px;">(Found a total of $totalstartpoints end nodes)</label>
+<br><label title="Jeśli API zwróci pojedynczą linię, pokaż do 2 więcej linii, przed i po wybranej przez Ciebie, z tym samym tagiem ref">
+  <input style="margin_left:30px;" type="checkbox" name="extendway" $extendway >Przed i Po</label>
+<br><label>Start na końcu linii numer <input type="text" name="start" value="$start" style="width:30px;">(Znaleziono $totalstartpoints węzłów końcowych)</label>
 </div>
 
 <div class="selectquery">
-<h3>Search for:</h3>
-<p><label>A relation with ref = <input type="text" name="relref" value="$relref"></label><input type="button" value=" Go " onClick="changeURL('relref');">
-<br><label>A relation with name = <input type="text" name="relname" value="$relname"></label><input type="button" value=" Go " onClick="changeURL('relname');">
-<br><label>A relation with id = <input type="text" name="relid" value="$relid"></label><input type="button" value=" Go " onClick="changeURL('relid');">
-<br><label>A way with id = <input type="text" name="wayid" value="$wayid"></label><input type="button" value=" Go " onClick="changeURL('wayid');">
-<br>Important: Please don't select relations with too many members (less than 200 seems ok)
+<h3>Pokaż:</h3>
+<p><label>Relację z ref = <input type="text" name="relref" value="$relref"></label><input type="button" value=" Go " onClick="changeURL('relref');">
+<br><label>Relację z name = <input type="text" name="relname" value="$relname"></label><input type="button" value=" Go " onClick="changeURL('relname');">
+<br><label>Relację z id = <input type="text" name="relid" value="$relid"></label><input type="button" value=" Go " onClick="changeURL('relid');">
+<br><label>Linię z id = <input type="text" name="wayid" value="$wayid"></label><input type="button" value=" Go " onClick="changeURL('wayid');">
+<br>Uwaga! Nie wczytuj zbyt długich relacji, bo...będziesz czekał lata i możesz się nie doczekać.
 </div>
 
 <div class="selectquery" style="width:350px;">
-<h3 title="Enter any valid Overpass query that returns a more or less contiguous list of not too many highways">The query</h3>
+<h3 title="Wpisz zapytanie do Overpassa zwracające listę mniej lub bardziej przyległych odcinków dróg">Zapytanie</h3>
 <textarea name="url" cols="45" rows="5">$url</textarea>
 <br><input type="button" value=" Go " onClick="changeURL('url');">
 <hr>
-<a target="_blank" href="http://overpass-turbo.eu/?Q=$urlescaped">Show in Overpass Turbo</a>
-<br><a href="http://osm.mueschelsoft.de/lanes/render.pl?$querystring">Link to this page</a>
+<a target="_blank" href="http://overpass-turbo.eu/?Q=$urlescaped">Pokaż na Overpass Turbo</a>
+<br><a href="http://javnik.tk/OLV/render.pl?$querystring">Link do tej strony</a>
 </div>
 </div>
 <div id="map"></div>
