@@ -334,7 +334,7 @@ div.middle {
   opacity: .5; }
 
 div.destination {
-  font-size: 9px;
+  font-size: 10px;
   position: relative;
   width: 110px;
   text-align: center;
@@ -413,13 +413,13 @@ span.destCountry {
 div.refA, div.refB, div.refK, div.refW, div.refDK, span.refA, span.refW, span.refDK, span.refS, span.refB, span.refK, div.refS, div.refE, span.refE, span.refG, div.refG, span.ref {
   margin: 2px 2px 2px 2px;
   padding: 0px 2px 0 2px;
-  border-radius: 4px;
+  border-radius: 3px;
   height: 11px;
   max-width: 100px;
   display: inline;
   float: right; }
 
-span.refA, span.refB, span.refK, span.refS, span.refE, span.ref {
+span.refA, span.refB, span.refK, span.refS, span.refE, span.refDK, span.refW, span.refG, span.ref {
   display: inline-block;
   float: none; }
 
@@ -558,7 +558,7 @@ div.refcont .tooltip {
   background-color: #ffffdd;
   color: black;
   border: 2px solid white;
-  border-radius: 4px;
+  border-radius: 3px;
   box-shadow: 3px 3px 3px #aaa;
   opacity: 0;
   margin-left: -999em;
