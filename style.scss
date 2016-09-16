@@ -458,7 +458,7 @@ span.destCountry {
   padding:1px;
   }
 
-div.refA, div.refB, div.refK, span.refA, span.refB, span.refK, div.refS, span.refS, div.refE, span.refE, span.ref {
+div.refA, div.refB, div.refK, div.refW, div.refDK, span.refA, span.refW, span.refDK, span.refS, span.refB, span.refK, div.refS, div.refE, span.refE, span.refG, div.refG, span.ref {
   margin:2px 2px 2px 2px;
   padding: 0px 2px 0 2px;
   border-radius: 4px;
@@ -514,7 +514,7 @@ div.A, div.B, div.K, div.S, div.AonA, div.R, div.IonA {
   }
 
 div.AonA {
-    background:$colorA_DK_S;
+    background:$colorAutobahn;
     border:1px solid white;
     color:white;
 }
