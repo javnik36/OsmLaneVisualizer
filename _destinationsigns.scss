@@ -1,36 +1,36 @@
 $wikimedia:"https://upload.wikimedia.org/wikipedia/commons";
 
-  div.industrial>span {
+  div.industrial>span:before {
     background-image:url($wikimedia + "/4/4e/RWB_Industriegebiet.svg") ;//??fabryka
     }
-  div.park_and_ride>span {
+  div.park_and_ride>span:before {
     background-image:url($wikimedia + "/9/94/Sinnbild_P-R.svg") ;//?P+R chyba nie ma takiego w PLszy
     }
-  div.parking>span {
+  div.parking>span:before {
     background-image:url($wikimedia + "/3/3b/Znak_D-18.svg") ;
     }
-  div.fuel>span {
+  div.fuel>span:before {
     background-image:url($wikimedia + "/5/5c/Znak_D-23.svg") ;
     }
-  div.stadium>span {
+  div.stadium>span:before {
     background-image:url($wikimedia + "/f/fb/Stadium_icon.svg") ;//stadio-chyba nie ma
     }
-  div.airport>span {
+  div.airport>span:before {
     background-image:url($wikimedia + "/5/51/Italian_traffic_signs_-_icona_aeroporto.svg") ;//e/ec/Znak_E-6.svg ale trza by wyciąć pol znaku
     }
-  div.restaurant>span {
+  div.restaurant>span:before {
     background-image:url($wikimedia + "/f/f7/Znak_D-28.svg") ;
     }
-  div.toilets>span {
+  div.toilets>span:before {
     background-image:url($wikimedia + "/0/07/Znak_D-26c.svg") ;
     }
-  div.motorway>span, div.highway>span {
+  div.motorway>span:before, div.highway>span:before {
     background-image:url($wikimedia + "/e/e9/Znak_D9.svg") ;
     }
-  div.hospital>span {
+  div.hospital>span:before {
     background-image:url($wikimedia + "/4/4a/Znak_D-21.svg") ;
     }
-  div.train_station>span {
+  div.train_station>span:before {
     background-color:white;
     background-image:url($wikimedia + "/3/33/Fernbahn_Signet_HVV.svg") ;///f/fb/Znak_E-6a.svg tylko trza wyciac pol znaku
     }
