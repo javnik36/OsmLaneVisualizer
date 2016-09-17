@@ -1,20 +1,22 @@
-#OsmLaneVisualizer <img alt="pl version" style="height:24px; transform:skewX(-30deg)" src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Nuvola_Polish_flag.svg">
+OsmLaneVisualizer
+=================
+A simple tool to show lane attributes of way data in OSM. Data can be fetched from Overpass API, output is created as Html code.
 
-Narzędzie słuące do wizualizacji tagów dotyczących dróg, głównie tagu destination wprowadzonych do OpenStreetMap. Dane są pobierane przez skrypt perla z Overpass API z któego tworzony jest kod html.
+**&lt;Advertisment&gt;Support for at least 105 different keys (that's more than a standard US keyboard!).&lt;/Advertisment&gt;**
 
-Fork kodu użytkownika mueschel dostosowany do polskiego oznakowania drogowego.
+The code is free to use under conditions of cc-by-nc-sa (http://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+How to get data
+--------------
+Option 1: Enter a way or relation id, or the ref or name of a relation into the appropriate box and click the "GO" button next to it.
+
+Option 2: Enter your own query or a valid json object (as output by Overpass) into the box "The Query" and click the "GO" button.
+
+If you change configuration (read the mouse-over text for explanations), click the same "GO" button again.
 
 
-##Chcesz odpalić u siebie?<br>
-Bardzo uproszczone indtrukcje dostępne w pliku [installing_on_server](https://github.com/javnik36/OsmLaneVisualizer/blob/master/installing_on_server).
-
-##Jak to działa?<br>
-1) Otwórz http://javnik.tk/OLV/render.pl<br>
-2) Wpisz zapytanie do Overpassa, id drogi, bądź tag ref, name, lub id relacji<br>
-3) Poczekaj trochę...<br>
-4) Ciesz się wizualizacją :tada: i sprawdź czy nie popełniłeś jakiegoś błędu.:thought_balloon:
-
-##Obsługiwane tagowanie:gb::
+Interpreted Tags
+--------------
 *  **bicycle[:lanes][:forward|:backward|:both_ways]** The values no, designated and official are displayed
 *  **bridge[:name]** Bridges are displayed using a shadow behind the lanes, the name is shown
 *  **bus[:lanes][:forward|:backward|:both_ways]** The values designated and official are displayed
@@ -51,14 +53,12 @@ Bardzo uproszczone indtrukcje dostępne w pliku [installing_on_server](https://g
 *  **traffic_calming=island** Shown on ways between lanes as dark area
 *  **traffic_calming:width** Used if enabled
 *  **tunnel:name** Name is shown if available
-*  **turn[:lanes][:forward|:backward|:both_ways]** Rendered by using Unicode characters.
+*  **turn[:lanes][:forward|:backward|:both_ways]** Rendered by using Unicode characters. 
 *  **width[:lanes][:forward|:backward]** Used if enabled
 
-##Inne<br>
-Oryginalne readme dostępne [tutaj](https://github.com/javnik36/OsmLaneVisualizer/blob/master/README_orig.md)
 
-Jeśli widzisz jakieś błędy, lub chcesz współtworzyć kod, śmiało! Zachęcam! :)
-
-Ten fork może się różnić od aktualnej wersji dostępnej pod https://github.com/mueschel/OsmLaneVisualizer
-
-@Stworzono na [licencji CC-BY-NC-SA](https://github.com/javnik36/OsmLaneVisualizer/blob/master/LICENCE) przez [mueschel](https://github.com/mueschel) i javnik36.
+Number of Lanes
+---------------
+The number of lanes is determined by reading all tags of way containing a :lanes part and the lanes tag itself.
+For both forward and backward direction, the maximal number is used - this might not be the intended number of lanes
+but helps to find tagging errors (e.g. stray pipes).
