@@ -120,32 +120,67 @@ print <<"HDOC";
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <title>OSM Lane Visualizer</title>
- <link rel="stylesheet" type="text/css" href="../OLV_style.css">
- <meta  charset="UTF-8"/>
-
-<script type="text/javascript">
-  function changeURL(x,str) {
-    var url = "?";
-    if (str)
-      url += x+'='+str;
-    else
-      url += x+'='+encodeURI(document.getElementsByName(x)[0].value);
-    url += "&start="+document.getElementsByName('start')[0].value;
-    url += document.getElementsByName('placement')[0].checked?"&placement":"";
-    url += document.getElementsByName('adjacent')[0].checked?"&adjacent":"";
-    url += document.getElementsByName('lanewidth')[0].checked?"&lanewidth":"";
-    url += document.getElementsByName('usenodes')[0].checked?"&usenodes":"";
-    url += document.getElementsByName('extendway')[0].checked?"&extendway":"";
-    window.location.href=url;
-    }
-</script>
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
-<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-
+    <script type="text/javascript">
+      function changeURL(x,str) {
+        var url = "?";
+        if (str)
+          url += x+'='+str;
+        else
+          url += x+'='+encodeURI(document.getElementsByName(x)[0].value);
+        url += "&start="+document.getElementsByName('start')[0].value;
+        url += document.getElementsByName('placement')[0].checked?"&placement":"";
+        url += document.getElementsByName('adjacent')[0].checked?"&adjacent":"";
+        url += document.getElementsByName('lanewidth')[0].checked?"&lanewidth":"";
+        url += document.getElementsByName('usenodes')[0].checked?"&usenodes":"";
+        url += document.getElementsByName('extendway')[0].checked?"&extendway":"";
+        window.location.href=url;
+        }
+    </script>
+    <meta charset="utf-8">
+    <title>OSM Lane Visualizer pl version</title>
+    <link rel="stylesheet" type="text/css" href="../OLV_style.css">
+    <link type="text/css" rel="stylesheet" href="./style.css">
+    <link type="text/css" rel="stylesheet" href="./materialize/css/materialize_my.css" media="screen,projection" />
+    <link href="https://fonts.googleapis.com/css?family=Chewy" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="./materialize/js/materialize.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Javnik">
+    <!-- favicons for bunch of devices from http://realfavicongenerator.net/ -->
+    <link rel="apple-touch-icon" sizes="57x57" href="./favs/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./favs/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./favs/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./favs/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./favs/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./favs/apple-touch-icon-120x120.png">
+    <link rel="icon" type="image/png" href="./favs/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="./favs/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="./favs/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="./favs/manifest.json">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="theme-color" content="#ffffff">
 </head>
 <body class="$extrasizeactive">
-<h1>OSM Lane Visualizer <i>pl</i></h1>
+<nav>
+    <div class="nav-wrapper container">
+        <span class="logo"><span class="javnik">javnik</span>.tk</span>
+        <a href="#" data-activates="mobile-demo" class="button-collapse right"><i class="mdi-navigation-menu"></i></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a class="waves-effect waves-light" href="./index.html">Home</a></li>
+            <li class="active"><a class="waves-effect waves-light" href="./osm.html">OSM</a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+            <li><a class="waves-effect waves-blue btn-flat" href="./index.html">Home</a></li>
+            <li class="active"><a class="waves-effect waves-blue btn-flat" href="./osm.html">OSM</a></li>
+        </ul>
+    </div>
+</nav>
+<main class="container">
+    <section class="row">
+        <div class="col s12 m12">
+<h1>OSM Lane Visualizer <img alt="pl version" style="height:24px; transform:skewX(-30deg)" src="./imgs/pl_flag.svg"></h1>
 <div id="header">
 <p>Wprowadź poprawne zapytanie do <a>Overpassa</a> zawierające listę następujących po sobie linii, np. jak <a href="http://overpass-turbo.eu/s/6vr">w tym przykładzie</a>. Wpisz swoje zapytanie w oknie poniżej.<br>
 Ponieważ w każdym zestawie danych są co najmniej 2 linie końcowe, wybierz jeden koniec i wpisz jego numer w okienku poniżej (przy złym wpisaniu droga będzie po prostu w drugim kierunku).<br>
@@ -250,9 +285,20 @@ unless($r) {
     }
   }
 print <<HDOC;
+</div>
+</section>
+</main>
+<footer class="page-footer">
+    <div class="footer-copyright">
+        <div class="container">
+            ©2015 Created with
+            <3 and <a href="http://materializecss.com/">materialized</a> by javnik
+        </div>
+    </div>
+</footer>
 </body>
 <script type="text/javascript">
-var map = L.map('map').setView([0, 0], 1);
+var map = L.map('map').setView([51.873,19.775], 1);
 L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png',
 	{ attribution: 'Map &copy; <a href="https://www.openstreetmap.org">OpenStreetMap</a>' }).addTo(map);
 var marker = L.marker(map.getCenter(), { draggable: false }).addTo(map);
