@@ -20,8 +20,7 @@ use OSMDraw;
 
 print "Content-Type: text/html; charset=utf-8\r\n\r\n";
 
-
-my $url = '<osm-script output="json" timeout="25"> <union> <query type="relation"> <has-kv k="TMC:cid_58:tabcd_1:LocationCode" v="8725"/> <has-kv k="TMC:cid_58:tabcd_1:Direction" v="negative" /> </query> </union> <print mode="body" order="id"/> <recurse type="down"/> <print order="quadtile"/> </osm-script>';
+my $url = '<osm-script output="json" timeout="25"><union><query type="way"><id-query ref="224904418" type="way"/></query></union><print mode="body" order="quadtile"/><recurse type="down"/><print  order="quadtile"/></osm-script>'
 
 my $start = 1;
 my $totalstartpoints = 0;
@@ -111,7 +110,7 @@ unless($r) {
   }
 my $urlescaped = uri_escape($url);
 my $querystring = $ENV{'QUERY_STRING'};
-my $wayid = $opts->{'wayid'} || 324294469;
+my $wayid = $opts->{'wayid'} || 224904418;
 my $relid = $opts->{'relid'} || 11037;
 my $relname = $opts->{'relname'} || 'Bundesstraße 521';
 my $relref  = $opts->{'relref'} || 'A 661';
@@ -145,7 +144,7 @@ print <<"HDOC";
 
 </head>
 <body class="$extrasizeactive">
-<h1>OSM Lane Visualizer <i>pl</i></h1>
+<h1>OSM Lane Visualizer <img alt="pl version" style="height:24px; transform:skewX(-30deg)" src="../imgs/pl_flag.svg"></h1>
 <div id="header">
 <p>Wprowadź poprawne zapytanie do <a>Overpassa</a> zawierające listę następujących po sobie linii, np. jak <a href="http://overpass-turbo.eu/s/6vr">w tym przykładzie</a>. Wpisz swoje zapytanie w oknie poniżej.<br>
 Ponieważ w każdym zestawie danych są co najmniej 2 linie końcowe, wybierz jeden koniec i wpisz jego numer w okienku poniżej (przy złym wpisaniu droga będzie po prostu w drugim kierunku).<br>
@@ -165,7 +164,7 @@ Więcej informacji na <a href="https://github.com/javnik36/OsmLaneVisualizer">Gi
 <!--<br><label title="Increase the size of all lanes by 50% in each direction">
   <input style="margin_left:30px;" type="checkbox" name="extrasize" $extrasize >Larger lanes</label>-->
 <br><label title="Jeśli API zwróci pojedynczą linię, pokaż do 2 więcej linii, przed i po wybranej przez Ciebie, z tym samym tagiem ref">
-  <input style="margin_left:30px;" type="checkbox" name="extendway" $extendway >Przed i Po</label>
+  <input style="margin_left:30px;" type="checkbox" name="extendway" $extendway >Linie przed i po</label>
 <br><label>Start na końcu linii numer <input type="text" name="start" value="$start" style="width:30px;">(Znaleziono $totalstartpoints węzłów końcowych)</label>
 </div>
 
@@ -252,7 +251,7 @@ unless($r) {
 print <<HDOC;
 </body>
 <script type="text/javascript">
-var map = L.map('map').setView([0, 0], 1);
+var map = L.map('map').setView([51.873,19.775], 7);
 L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png',
 	{ attribution: 'Map &copy; <a href="https://www.openstreetmap.org">OpenStreetMap</a>' }).addTo(map);
 var marker = L.marker(map.getCenter(), { draggable: false }).addTo(map);
