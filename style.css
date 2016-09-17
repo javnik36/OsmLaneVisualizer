@@ -435,7 +435,7 @@ span.refA, span.refB, span.refK, span.refS, span.refE, span.refDK, span.refW, sp
   float: none; }
 
 div.refA, span.refA, div.refDK, span.refDK, div.refS, span.refS {
-  background: #FF0000;
+  background: #E70000;
   border: 1px solid white;
   color: white; }
 
