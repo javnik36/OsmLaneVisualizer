@@ -1,12 +1,11 @@
 #OsmLaneVisualizer <img alt="pl version" style="height:24px; transform:skewX(-30deg)" src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Nuvola_Polish_flag.svg">
 
-Narzędzie słuące do wizualizacji tagów dotyczących dróg, głównie tagu destination wprowadzonych do OpenStreetMap. Dane są pobierane przez skrypt perla z Overpass API z któego tworzony jest kod html.
+Narzędzie słuące do wizualizacji tagów dotyczących dróg, głównie tagu destination wprowadzonych do OpenStreetMap. Dane są pobierane przez skrypt perla z Overpass API, z którego tworzony jest kod html.
 
 Fork kodu użytkownika mueschel dostosowany do polskiego oznakowania drogowego.
 
-
 ##Chcesz odpalić u siebie?<br>
-Bardzo uproszczone indtrukcje dostępne w pliku [installing_on_server](https://github.com/javnik36/OsmLaneVisualizer/blob/master/installing_on_server).
+Bardzo uproszczone instrukcje dostępne w pliku [installing_on_server](https://github.com/javnik36/OsmLaneVisualizer/blob/master/installing_on_server).
 
 ##Jak to działa?<br>
 1) Otwórz http://javnik.tk/OLV/render.pl<br>
@@ -14,7 +13,7 @@ Bardzo uproszczone indtrukcje dostępne w pliku [installing_on_server](https://g
 3) Poczekaj trochę...<br>
 4) Ciesz się wizualizacją :tada: i sprawdź czy nie popełniłeś jakiegoś błędu.:thought_balloon:
 
-##Obsługiwane tagowanie:gb::
+##Obsługiwane tagowanie(en):
 *  **bicycle[:lanes][:forward|:backward|:both_ways]** The values no, designated and official are displayed
 *  **bridge[:name]** Bridges are displayed using a shadow behind the lanes, the name is shown
 *  **bus[:lanes][:forward|:backward|:both_ways]** The values designated and official are displayed
