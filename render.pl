@@ -20,7 +20,7 @@ use OSMDraw;
 
 print "Content-Type: text/html; charset=utf-8\r\n\r\n";
 
-my $url = '<osm-script output="json" timeout="25"><union><query type="way"><id-query ref="224904418" type="way"/></query></union><print mode="body" order="quadtile"/><recurse type="down"/><print  order="quadtile"/></osm-script>'
+my $url = '<osm-script output="json" timeout="25"><union><query type="way"><id-query ref="224904418" type="way"/></query></union><print mode="body" order="quadtile"/><recurse type="down"/><print  order="quadtile"/></osm-script>';
 
 my $start = 1;
 my $totalstartpoints = 0;
